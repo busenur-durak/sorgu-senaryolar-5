@@ -1,0 +1,25 @@
+1. Film tablosunda, title sütunu 'n' karakteri ile biten, en uzun (length) 5 filmi sıralayınız.
+SELECT *
+FROM film
+WHERE title LIKE '%n'
+ORDER BY length DESC
+LIMIT 5;
+2. Film tablosunda, title 'n' karakteri ile biten filmler arasında, en kısa uzunlukta (length) ikinci 5 filmi (6.,7.,8.,9.,10. film) sıralayınız.
+Burada ilk 5 en kısa filmi atlayıp, 6-10 arası sıralamak istiyoruz.
+SELECT *
+FROM (
+    SELECT *
+    FROM film
+    WHERE title LIKE '%n'
+    ORDER BY length ASC
+    LIMIT 10
+) AS alt_sorgu
+ORDER BY length ASC
+OFFSET 5
+LIMIT 5;
+3. customer tablosunda, store_id = 1 olan müşterilerden, last_name sütununa göre azalan sıralamada ilk 4 veriyi getiriniz.
+SELECT *
+FROM customer
+WHERE store_id = 1
+ORDER BY last_name DESC
+LIMIT 4;
